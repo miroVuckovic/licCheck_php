@@ -1,0 +1,40 @@
+lmutil - Copyright (c) 1989-2019 Flexera. All Rights Reserved.
+Flexible License Manager status on Fri 5/26/2023 12:42
+
+[Detecting lmgrd processes...]
+License server status: 25734@licserver
+    License file(s) on licserver: C:\Program Files (x86)\SOLIDWORKS Corp\SolidNetWork License Manager\licenses\sw_d.lic:
+
+licserver: license server UP (MASTER) v11.16.5
+
+Vendor daemon status (on licserver):
+
+      SW_D: UP v11.16.5
+Feature usage info:
+
+Users of snlcore:  (Total of 1 license issued;  Total of 0 licenses in use)
+
+Users of camstd:  (Total of 10 licenses issued;  Total of 0 licenses in use)
+
+Users of solidworks:  (Total of 10 licenses issued;  Total of 5 licenses in use)
+
+  "solidworks" v30.0, vendor: SW_D, expiry: 24-may-2024
+  vendor_string: ed=permanent sd=6-30-2025 sn=0000000000000000000000000
+  floating license
+
+    user1 HR-SBD-USER01-01 HR-SBD-USER01-01 (v30.0) (licserver/25734 102), start Thu 5/25 12:35
+    user2 HR-SBD-USER02-01 HR-SBD-USER02-01 (v29.0) (licserver/25734 905), start Fri 5/26 8:13
+    user3 HR-SBD-USER03-01 HR-SBD-USER03-01 (v30.0) (licserver/25734 1107), start Fri 5/26 9:56
+    user4 HR-SBD-USER04-01 HR-SBD-USER04-01 (v27.0) (licserver/25734 606), start Fri 5/26 11:19
+    user5 HR-SBD-USER05-01 HR-SBD-USER05-01 (v29.0) (licserver/25734 306), start Fri 5/26 12:17
+
+Users of swofficepremium:  (Total of 10 licenses issued;  Total of 2 licenses in use)
+
+  "swofficepremium" v30.0, vendor: SW_D, expiry: 24-may-2024
+  vendor_string: ed=permanent sd=6-30-2025 sn=0000000000000000000000000
+  floating license
+
+    user1 HR-SBD-USER01-01 HR-SBD-USER01-01 (v12.0) (licserver/25734 403), start Thu 5/25 12:37
+    user2 HR-SBD-USER02-01 HR-SBD-USER02-01 (v12.0) (licserver/25734 1004), start Fri 5/26 7:02
+
+

@@ -1,0 +1,2 @@
+# licCheck
+CAD License Checker
