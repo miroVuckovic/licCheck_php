@@ -1,11 +1,24 @@
 <?php
 
 session_start();
-require 'config.php'; // Database configuration
+
+require '../../config/config.php';  // Database configuration
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
     $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-    $password = filter_input(INPUT_POST, 'psw', FILTER_SANITIZE_STRING);
+
+    if ($email === false) {
+        // Handle invalid email address
+        die('Invalid email address.');
+    }
+
+    $password = $_POST['psw'];
+
+    if (empty($password)) {
+        // Handle empty password
+        die('Password cannot be empty.');
+    }
 
     if ($email && $password) {
         $stmt = $conn->prepare('SELECT id, password FROM users WHERE email = ?');
@@ -20,7 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (password_verify($password, $hashed_password)) {
                 session_regenerate_id(true);
                 $_SESSION['user_id'] = $id;
-                header('Location: ../../index.php');
+                $_SESSION['logged_in'] = true;
+                header('Location: http://localhost/licCheck/index.php');
                 exit;
             } else {
                 $error_message = "Invalid email or password.";

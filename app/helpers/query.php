@@ -1,6 +1,6 @@
 <?php
 
-include "scripts/php/misc.php";
+include "misc.php";
 
 function populateLicenseTable($cadSystem, $port, $server, $product)
 {

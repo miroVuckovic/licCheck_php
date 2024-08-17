@@ -1,8 +1,11 @@
-* {box-sizing: border-box}
+* {
+  box-sizing: border-box;
+  font-family: "Helvetica", "Lucida Console", "Courier New", monospace;
+}
 
 /* Add padding to containers */
 .container {
-    border: 1px solid black;
+  border: 1px solid black;
   padding: 16px;
   width: 40%;
   position: fixed;
@@ -10,7 +13,8 @@
 }
 
 /* Full-width input fields */
-input[type=text], input[type=password] {
+input[type=text],
+input[type=password] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -19,7 +23,8 @@ input[type=text], input[type=password] {
   background: #f1f1f1;
 }
 
-input[type=text]:focus, input[type=password]:focus {
+input[type=text]:focus,
+input[type=password]:focus {
   background-color: #ddd;
   outline: none;
 }
@@ -43,7 +48,7 @@ hr {
 }
 
 .registerbtn:hover {
-  opacity:1;
+  opacity: 1;
 }
 
 /* Add a blue text color to links */

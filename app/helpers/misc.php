@@ -11,4 +11,4 @@ function reformatDate($date)
     return ($dateElements[1] . "." . $dateElements[0]);
 }
 
-?>
+

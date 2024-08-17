@@ -1,0 +1,7 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /licCheck/
+
+    # Rewrite /index.php to /public/index.php
+    RewriteRule ^index\.php$ public/index.php [L]
+</IfModule>
