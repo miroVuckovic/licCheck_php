@@ -16,15 +16,15 @@ if (isset($_SESSION['logged_in'])) {
 
     readfile("../app/views/sidebar.html");
 
-    echo "<body>";
-
-    readfile("../app/views/nav.html");
+    echo "<body>";   
 
     $cadParam;
 
     header_remove();
 
     echo "<main>";
+    
+    readfile("../app/views/nav.html");
 
     function initQuery()
     {

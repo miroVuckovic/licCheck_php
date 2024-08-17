@@ -5,9 +5,9 @@ include "misc.php";
 function populateLicenseTable($cadSystem, $port, $server, $product)
 {
 
-    // header("Refresh: 5; url='index-tabs.php?cad=$cadSystem'");
+    // header("Refresh: 5; url='index.php?cad=$cadSystem'");
 
-    $localPath = "c:\\xampp\\htdocs\\licCheck\\lmutils";
+    $localPath = "c:\\xampp\\htdocs\\licCheck\\app\\helpers";
     $localFullPath = "$localPath\\cad\\Release\\net8.0\\lmutil_demo.exe";
 
     echo '<aside id="lic-summary">';
@@ -57,9 +57,7 @@ function populateLicenseTable($cadSystem, $port, $server, $product)
             $totalLics = htmlspecialchars($words[5]);
             $usedLics = htmlspecialchars($words[10]);
 
-            $freeLics = $totalLics - $usedLics;
-
-            
+            $freeLics = $totalLics - $usedLics;          
 
             echo "Total number of licenses: " . htmlspecialchars($words[5]);
             echo "<br>";
@@ -85,6 +83,7 @@ function populateLicenseTable($cadSystem, $port, $server, $product)
             echo "<p>No licenses taken.</p>";
         } else {
 
+            echo "<div class='table-container'>";
             echo "<table>";
             echo "<thead><tr><th>No.</th><th>Users</th><th>Computer</th><th>Display</th><th>Start date</th></tr></thead>";
             // echo "<br>";
@@ -115,6 +114,7 @@ function populateLicenseTable($cadSystem, $port, $server, $product)
             }
 
             echo "</tbody></table>";
+            echo "</div>";
 
             echo "<br>";
 
