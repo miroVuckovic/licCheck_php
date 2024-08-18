@@ -23,6 +23,7 @@ body {
 .sidebar {
   border: 1px solid black;
   position: fixed;
+  top: 101px;
   width: 190px;
   height: calc(100vh - 102px);
   /* padding-left: 15px; */
@@ -32,16 +33,35 @@ body {
   color: #9AB6CA;
 }
 
+.links {
+  padding: 10px;
+  transition: 0.3s;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: #9AB6CA;
+}
+
+.links:hover {
+  background-color: #ddd;
+}
+
 #logo-sidebar {
+  position: fixed;
+  left: 8px;
   border: 1px solid black;
   width: 190px;
   height: 90px;
   /* padding-bottom: 15px; */
   /* margin-bottom: 15px; */
-  background-color: #E4EBF0;
-  color: black;
+  /* background-color: #E4EBF0; */
+  /* color: black; */
   /* margin-right: 5px; */
-  text-align: center;
+  text-align: center; 
+}
+
+img {
+  width: 190px;
+  height: 90px;
 }
 
 .account-header {
@@ -68,7 +88,7 @@ body {
 main {
   /* border: 1px solid red; */
   position: fixed;
-  /* top: 12%; */
+  top: 101px;
   left: 210px;
   width: 88%;
   height: 80%;
@@ -115,7 +135,7 @@ button::selection {
 }
 
 /* Create an active/current tablink class */
-.cad-nav-tab button.active {
+.cad-nav-tab button:active {
   background-color: #ccc;
 }
 
