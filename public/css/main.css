@@ -4,6 +4,7 @@ html {
 
 * {
   /* border: 1px solid red; */
+  color: black;
 }
 
 h1 {
@@ -15,8 +16,53 @@ body {
   color: #326283;
   font-size: medium;
   text-align: center;
-  border: 1px solid green;
+  /* border: 1px solid green; */
   height: 97vh;
+}
+
+.sidebar {
+  border: 1px solid black;
+  position: fixed;
+  width: 190px;
+  height: calc(100vh - 102px);
+  /* padding-left: 15px; */
+  /* margin-left: 15px; */
+  /* float: left; */
+  background-color: #E4EBF0;
+  color: #9AB6CA;
+}
+
+#logo-sidebar {
+  border: 1px solid black;
+  width: 190px;
+  height: 90px;
+  /* padding-bottom: 15px; */
+  /* margin-bottom: 15px; */
+  background-color: #E4EBF0;
+  color: black;
+  /* margin-right: 5px; */
+  text-align: center;
+}
+
+.account-header {
+  border: 1px solid black;
+  background-color: #9AB6CA;
+  position: fixed;
+  left: 210px;
+  width: 88%;
+  height: 90px;
+  color: black;
+}
+
+.account-box {
+  position: inherit;
+  right: 0px;
+  width: 200px;
+  height: 90px;
+  /* border: 1px solid red; */
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
 }
 
 main {
@@ -42,64 +88,13 @@ button::selection {
   background-color: red;
 }
 
-.table-container {
-  overflow-y: scroll;
-}
-
-table {
-  width: 70%;
-  position: fixed;
-  top: 10%;
-  border-collapse: collapse;
-  overflow-y: scroll;
-  /* margin: auto; */
-  /* vertical-align: left; */
-}
-
-thead {
-  position: static;
-  width: 1vw;
-  /* bottom: 0; */
-  width: auto;
-}
-
-th {
-  background-color: #9AB6CA;  
-  color: white;
-  border: 2px solid grey;
-  padding: 8px;
-  text-align: center;
-  font-size: 16px;
-}
-
-td {
-  border: 2px solid grey;
-  padding: 4px;
-  text-align: center;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-footer {
-  border-color: red;
-  bottom: 0;
-  font-weight: bold;
-  background-color: #9AB6CA;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 10%;
-  text-align: center;
-  vertical-align: middle;
-}
-
 /* Style the tab */
 .cad-nav-tab {
   /* overflow: hidden; */
-  /* border: 1px solid red; */
+  border: 1px solid black;
   background-color: #9AB6CA;
   position: fixed;
-  left: calc(200px + 5px);
+  left: 210px;
   /* width: calc(100%); */
 }
 
@@ -132,37 +127,79 @@ footer {
   border-top: none;
 }
 
-.sidebar {
+.table-container {
+  position: relative;
+  top: 50px;
   /* border: 1px solid red; */
-  position: fixed;
-  width: 190px;
-  height: 100vh;
-  /* padding-left: 15px; */
-  /* margin-left: 15px; */
-  /* float: left; */
-  background-color: #E4EBF0;
-  color: #9AB6CA;
-
-
+  overflow-y: auto;
+  box-sizing: content-box;
+  vertical-align: middle;
+  height: calc(100vh - 150px - 100px);
+  width: 80%;
 }
 
-#logo-sidebar {
+table {
   /* border: 1px solid red; */
-  width: 10%;
-  /* padding-bottom: 15px; */
-  margin-bottom: 15px;
-  background-color: #E4EBF0;
-  color: black;
-  margin-right: 5px;
+  width: 70%;
+  height: auto;
+  /* position: relative; */
+  /* top: 50px; */
+  border-collapse: collapse;
+  overflow-y: auto;
+  /* margin: auto; */
+  /* vertical-align: left; */
+}
+
+thead {
+  position: static;
+  width: 1vw;
+  /* bottom: 0; */
+  width: auto;
+}
+
+th {
+  background-color: #9AB6CA;
+  /* color: white; */
+  border: 2px solid grey;
+  padding: 8px;
+  text-align: center;
+  font-size: 16px;
+}
+
+td {
+  border: 2px solid grey;
+  padding: 4px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 #lic-summary {
-  border: 1px solid #9AB6CA;
+  border: 1px solid black;
   /* background-color: #E4EBF0; */
-  position: fixed;
+  position: relative;
+  top: 50px;
   width: 15%;
   float: right;
-  top: 10%;
-  right: 20px;
+  /* top: 10%; */
+  /* right: 10px; */
   padding-top: 5px;
 }
+
+footer {
+  border: 1px solid black;
+  bottom: 0;
+  font-weight: bold;
+  background-color: #9AB6CA;
+  position: fixed;
+  left: 210px;
+  bottom: 0;
+  width: 88%;
+  height: 90px;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 5px;
+}
+
+
+

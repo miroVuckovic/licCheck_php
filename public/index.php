@@ -10,9 +10,13 @@ if (isset($_SESSION['logged_in'])) {
 
     // echo 'session:' . $_SESSION['logged_in'];
 
+    
     include "../app/helpers/query.php";
+    
 
     readfile("../app/views/head.html");
+
+    include "../app/views/account-header.php";
 
     readfile("../app/views/sidebar.html");
 
