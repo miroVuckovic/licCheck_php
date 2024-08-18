@@ -10,9 +10,7 @@ if (isset($_SESSION['logged_in'])) {
 
     // echo 'session:' . $_SESSION['logged_in'];
 
-    
-    include "../app/helpers/query.php";
-    
+    include "../app/helpers/query-cad-lics.php";
 
     readfile("../app/views/head.html");
 
@@ -20,23 +18,31 @@ if (isset($_SESSION['logged_in'])) {
 
     readfile("../app/views/sidebar.html");
 
-    echo "<body>";   
+    echo "<body>";
 
     $cadParam;
 
     header_remove();
 
     echo "<main>";
-    
-    readfile("../app/views/nav.html");
 
     function initQuery()
     {
 
         if (isset($_GET['cad'])) {
 
+            readfile("../app/views/nav.html");
+
             global $cadParam;
             $cadParam = $_GET['cad'];
+
+            if ($cadParam=='all'){
+                echo "</main>";
+                echo "</body>";
+            
+                readfile("../app/views/footer.html");   
+                exit;
+            }
 
             // $url = $_SERVER['PHP_SELF'] . '?cad=' . $cadParam;
 
@@ -67,6 +73,9 @@ if (isset($_SESSION['logged_in'])) {
                 case 'revit':
                     populateLicenseTable("Revit", "27000", "HR-SBD-LIC-01.cadenas.internal", "cad");
                     break;
+                case 'all':
+                    populateLicenseTable("Revit", "27000", "HR-SBD-LIC-01.cadenas.internal", "all");
+                    break;
                 default:
             }
         }
@@ -77,30 +86,7 @@ if (isset($_SESSION['logged_in'])) {
     echo "</main>";
     echo "</body>";
 
-    echo "<script>
-    function openCAD(evt, cadName) {
-      // Declare all variables
-      var i, tabcontent, tablinks;
-    
-      // Get all elements with class='tabcontent' and hide them
-      tabcontent = document.getElementsByClassName('tabcontent');
-      for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = 'none';
-      }
-    
-      // Get all elements with class='tablinks' and remove the class 'active'
-      tablinks = document.getElementsByClassName('tablinks');
-      for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(' active', '');
-      }
-    
-      // Show the current tab, and add an 'active' class to the button that opened the tab
-      document.getElementById(cadName).style.display = 'block';
-      evt.currentTarget.className += ' active';
-    } 
-    </script>";
-
-    readfile("../app/views/footer.html");
+    readfile("../app/views/footer.html");   
 
 } else {
     // echo 'session:' . $_SESSION['logged_in'];
@@ -109,5 +95,7 @@ if (isset($_SESSION['logged_in'])) {
     readfile($path);
     die;
 }
+
+
 
 

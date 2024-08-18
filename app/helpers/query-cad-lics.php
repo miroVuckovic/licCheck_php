@@ -7,6 +7,10 @@ function populateLicenseTable($cadSystem, $port, $server, $product)
 
     // header("Refresh: 5; url='index.php?cad=$cadSystem'");
 
+    if ($product=="all") {
+        die;
+    }
+
     $localPath = "c:\\xampp\\htdocs\\licCheck\\app\\helpers";
     $localFullPath = "$localPath\\cad\\Release\\net8.0\\lmutil_demo.exe";
 
