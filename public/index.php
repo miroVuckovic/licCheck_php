@@ -4,6 +4,8 @@
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
 
+$demoMode = true;
+
 session_start();
 
 if (isset($_SESSION['logged_in'])) {
@@ -95,7 +97,3 @@ if (isset($_SESSION['logged_in'])) {
     readfile($path);
     die;
 }
-
-
-
-
