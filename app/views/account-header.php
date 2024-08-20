@@ -2,7 +2,16 @@
 
 // session_start();
 
+$demoMode = true;
+
 echo "<header class='account-header'>";
+
+if ($demoMode==true) {
+    echo "<figure class='demo'>";
+    echo "DEMO";
+    echo "</figure>";
+}
+
 echo "<figure class='account-box'>";
 
 if (isset($_SESSION['username'])) {

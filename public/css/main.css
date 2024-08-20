@@ -64,7 +64,7 @@ body {
   /* background-color: #E4EBF0; */
   /* color: black; */
   /* margin-right: 5px; */
-  text-align: center; 
+  text-align: center;
 }
 
 img {
@@ -79,11 +79,11 @@ img {
   left: 210px;
   width: 88%;
   height: 90px;
-  
+
 }
 
 .account-box {
-  position:fixed;
+  position: fixed;
   top: 0px;
   right: 0px;
   width: 280px;
@@ -96,7 +96,9 @@ img {
   /* background-color: white; */
 }
 
-.login:visited, .login:hover, .login:active {
+.login:visited,
+.login:hover,
+.login:active {
   color: inherit;
 }
 
@@ -154,12 +156,12 @@ main {
   box-sizing: content-box;
   vertical-align: middle;
   height: calc(100vh - 150px - 70px);
-  width: 80%;
+  width: 60%;
 }
 
 table {
   /* border: 1px solid red; */
-  width: 70%;
+  /* width: 70%; */
   height: auto;
   /* position: relative; */
   /* top: 50px; */
@@ -174,7 +176,7 @@ thead {
   width: 1vw;
   /* bottom: 0; */
   width: auto;
-  
+
 }
 
 th {
@@ -223,8 +225,18 @@ footer {
 }
 
 a {
-  color:white;
+  color: white;
 }
 
-
-
+.demo {
+  position: relative;
+  bottom: 15px;
+  left: 0px;
+  color: white;
+  border: 1px solid red;
+  font-size:x-large;
+  font-weight: bolder;
+  margin: 50px;
+  width:fit-content;
+  /* padding-right: 50px; */
+}
