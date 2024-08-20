@@ -55,8 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate password
     if (empty(trim($_POST["psw"]))) {
         $password_err = "Please enter a password.";
-    } elseif (strlen(trim($_POST["psw"])) < 6) {
-        $password_err = "Password must have at least 6 characters.";
+    } elseif (strlen(trim($_POST["psw"])) < 4) {
+        $password_err = "Password must have at least 4 characters.";
     } else {
         $password = trim($_POST["psw"]);
     }

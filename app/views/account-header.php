@@ -7,10 +7,13 @@ echo "<figure class='account-box'>";
 
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
+    $role_desc = $_SESSION['role_desc'];
     // $role = $_SESSION['role'];
     echo "<div class='login'>";   
-    echo "Ulogirani ste kao: ";
+    echo "Korisnik: ";
     echo htmlspecialchars($username);
+    echo "<br>";
+    echo "Rola: " . htmlspecialchars($role_desc);
     echo "</div>";
 } else {
     echo "<div class='login'>";   

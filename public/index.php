@@ -18,7 +18,7 @@ if (isset($_SESSION['logged_in'])) {
 
     include "../app/views/account-header.php";
 
-    readfile("../app/views/sidebar.html");
+    include "../app/views/sidebar.php";
 
     echo "<body>";
 

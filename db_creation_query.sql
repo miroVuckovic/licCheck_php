@@ -39,3 +39,9 @@ CREATE TABLE role_permissions (
 INSERT INTO roles (role_name) VALUES ('Administrator'), ('User'), ('Guest');
 
 INSERT INTO permissions (permission_name) VALUES ('CREATE_USER'), ('EDIT_USER'), ('DELETE_USER'), ('VIEW_USER');
+
+INSERT INTO users (username,password,email) VALUES ('admin','$2y$10$j6SPOOVZ4puJJ9BI.Ed.cuIFvsNNEIWIvkIHvqQw9vqRPnQ29q1he','admin@admin.com');
+INSERT INTO user_roles (user_id,role_id) VALUES (1,1);
+
+INSERT INTO users (username,password,email) VALUES ('user1','$2y$10$1jlC2NpKDfl5SqfEw6QPhuk4N/qTqtsMXEAzStUFer1dp7rzfubwS','user1@user1.com');
+INSERT INTO user_roles (user_id,role_id) VALUES (2,2);

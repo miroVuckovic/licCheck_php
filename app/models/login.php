@@ -9,15 +9,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
 
     if ($email === false) {
-        // Handle invalid email address
-        die('Invalid email address.');
+        echo 'Invalid email address.';
+        die;
     }
 
     $password = $_POST['psw'];
 
     if (empty($password)) {
-        // Handle empty password
-        die('Password cannot be empty.');
+        echo ('Password cannot be empty.');
+        die;
     }
 
     if ($email && $password) {
@@ -35,6 +35,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['user_id'] = $id;
                 $_SESSION['username'] = $username;
                 $_SESSION['logged_in'] = true;
+
+                $stmt = $conn->prepare('SELECT role_id FROM user_roles WHERE user_id = ?');
+                $stmt->bind_param('s', $id);
+                $stmt->execute();
+                $stmt->store_result();
+
+                if ($stmt->num_rows > 0) {
+                    $stmt->bind_result($role_id);
+                    $stmt->fetch();
+                }
+
+                $_SESSION['role_id'] = $role_id;
+
+                $stmt = $conn->prepare('SELECT role_name FROM roles WHERE id = ?');
+                $stmt->bind_param('s', $role_id);
+                $stmt->execute();
+                $stmt->store_result();
+
+                if ($stmt->num_rows > 0) {
+                    $stmt->bind_result($role_desc);
+                    $stmt->fetch();
+                }
+
+                $_SESSION['role_desc'] = $role_desc;
+
                 header('Location: http://localhost/licCheck/index.php');
                 exit;
             } else {

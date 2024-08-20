@@ -4,7 +4,7 @@ html {
 
 * {
   /* border: 1px solid red; */
-  color: black;
+  /* color: black; */
 }
 
 h1 {
@@ -88,12 +88,16 @@ img {
   right: 0px;
   width: 280px;
   height: inherit;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   text-align: center;
   /* padding: 10px; */
   /* margin: 10px; */
-  color: grey;
+  color: white;
   /* background-color: white; */
+}
+
+.login:visited, .login:hover, .login:active {
+  color: inherit;
 }
 
 main {
@@ -107,17 +111,6 @@ main {
   box-sizing: content-box;
   vertical-align: middle;
 }
-
-/* button {
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
-} */
-
-/* button::selection {
-  background-color: red;
-} */
 
 .cad-nav-tab {
   /* overflow: hidden; */
@@ -227,6 +220,10 @@ footer {
   vertical-align: middle;
   margin-top: 5px;
   color: white;
+}
+
+a {
+  color:white;
 }
 
 
