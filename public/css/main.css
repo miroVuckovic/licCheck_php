@@ -156,12 +156,12 @@ main {
   box-sizing: content-box;
   vertical-align: middle;
   height: calc(100vh - 150px - 70px);
-  width: 60%;
+  width: 80%;
 }
 
 table {
   /* border: 1px solid red; */
-  /* width: 70%; */
+  width: 100%;
   height: auto;
   /* position: relative; */
   /* top: 50px; */
@@ -239,4 +239,28 @@ a {
   margin: 50px;
   width:fit-content;
   /* padding-right: 50px; */
+}
+
+.training-container {
+  width: 96%;
+  overflow-y: auto;
+  box-sizing: content-box;
+  vertical-align: middle;
+  height: calc(100vh - 150px - 70px);
+}
+
+.video-item {
+
+}
+
+.video-title {
+
+}
+
+.video-description {
+
+}
+
+.video-thumbnail {
+
 }
