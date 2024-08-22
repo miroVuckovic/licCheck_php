@@ -109,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
 
 
-                header("location: http://localhost/licCheck/index.php");
+                header("location: ../../index.php");
             } else {
                 echo "Something went wrong. Please try again later.";
             }
