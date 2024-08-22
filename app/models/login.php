@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 $_SESSION['role_desc'] = $role_desc;
 
-                header('Location: http://localhost/licCheck/index.php');
+                header('Location: ../../index.php');
                 exit;
             } else {
                 $error_message = "Invalid email or password.";
