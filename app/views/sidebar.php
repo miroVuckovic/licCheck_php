@@ -13,12 +13,6 @@ echo "<aside class='sidebar'>";
 
 switch ($role_id) {
 
-    case 1:
-        echo $cad_lics;
-        echo $cad_admin;
-        echo $user_admin;
-        echo $user_training;
-        break;
     case 2:
         echo $cad_lics;
         echo $user_training;
@@ -28,8 +22,11 @@ switch ($role_id) {
         echo $user_training;
         break;
     default:
-
+        echo $cad_lics;
+        echo $cad_admin;
+        echo $user_admin;
+        echo $user_training;
+        break;
 }
-
 
 echo "</aside>";

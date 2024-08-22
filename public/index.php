@@ -8,8 +8,6 @@ session_start();
 
 if (isset($_SESSION['logged_in'])) {
 
-    // echo 'session:' . $_SESSION['logged_in'];
-
     include "../app/helpers/query-cad-lics.php";
 
     readfile("../app/views/head.html");
@@ -20,17 +18,13 @@ if (isset($_SESSION['logged_in'])) {
 
     echo "<body>";
 
-    $cadParam;
-
     header_remove();
 
     echo "<main>";
 
-
-
     if (isset($_GET['page'])) {
+        
         $page = $_GET['page'];
-
         switch ($page) {
             case "training":
                 readfile("../app/views/training.html");

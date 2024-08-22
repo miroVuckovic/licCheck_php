@@ -2,12 +2,10 @@
 
 function initQuery()
 {
+    readfile("../app/views/nav.html");
 
-if (isset($_GET['cad'])) {
+    if (isset($_GET['cad'])) {       
 
-        readfile("../app/views/nav.html");
-
-        global $cadParam;
         $cadParam = $_GET['cad'];
 
         if ($cadParam == 'all') {
@@ -18,42 +16,36 @@ if (isset($_GET['cad'])) {
             exit;
         }
 
-            // $url = $_SERVER['PHP_SELF'] . '?cad=' . $cadParam;
+        // $url = $_SERVER['PHP_SELF'] . '?cad=' . $cadParam;
 
-            // header("Refresh: 5; url=$url");
+        // header("Refresh: 5; url=$url");
 
-            switch ($cadParam) {
-                case 'autocad':
-                    // echo "<div id=" . "autocad"  . "class=tabcontent>";
-                    populateLicenseTable("Autocad", "27000", "server.example.com", "cad");
-                    // echo "</div>";
-                    break;
-                case 'inventor':
-                    // echo "<div id=" . "inventor"  . "class=tabcontent>";
-                    populateLicenseTable("Inventor", "27000", "server.example.com", "cad");
-                    // echo "</div>";
-                    break;
-                case 'solidworks':
-                    // echo "<div id=" . "solidworks"  . "class=tabcontent>";
-                    populateLicenseTable("Solidworks", "25734", "server.example.com", "cad");
-                    // echo "</div>";
-                    break;
-                case 'nx':
-                    populateLicenseTable("NX", "28000", "server.example.com", "cad");
-                    break;
-                case 'creo':
-                    populateLicenseTable("Creo Parametric", "7788", "server.example.com", "cad");
-                    break;
-                case 'revit':
-                    populateLicenseTable("Revit", "27000", "server.example.com", "cad");
-                    break;
-                case 'all':
-                    populateLicenseTable("Revit", "27000", "server.example.com", "all");
-                    break;
-                default:
-            }
+        switch ($cadParam) {
+            case 'autocad':
+                populateLicenseTable("Autocad", "27000", "server.example.com", "cad");
+                break;
+            case 'inventor':
+                populateLicenseTable("Inventor", "27000", "server.example.com", "cad");
+                break;
+            case 'solidworks':
+                populateLicenseTable("Solidworks", "25734", "server.example.com", "cad");
+                break;
+            case 'nx':
+                populateLicenseTable("NX", "28000", "server.example.com", "cad");
+                break;
+            case 'creo':
+                populateLicenseTable("Creo Parametric", "7788", "server.example.com", "cad");
+                break;
+            case 'revit':
+                populateLicenseTable("Revit", "27000", "server.example.com", "cad");
+                break;
+            case 'all':
+                populateLicenseTable("Revit", "27000", "server.example.com", "all");
+                break;
+            default:
         }
     }
 }
+
 
 initQuery();
