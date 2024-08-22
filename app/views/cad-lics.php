@@ -25,30 +25,30 @@ if (isset($_GET['cad'])) {
             switch ($cadParam) {
                 case 'autocad':
                     // echo "<div id=" . "autocad"  . "class=tabcontent>";
-                    populateLicenseTable("Autocad", "27000", "HR-SBD-LIC-01.cadenas.internal", "cad");
+                    populateLicenseTable("Autocad", "27000", "server.example.com", "cad");
                     // echo "</div>";
                     break;
                 case 'inventor':
                     // echo "<div id=" . "inventor"  . "class=tabcontent>";
-                    populateLicenseTable("Inventor", "27000", "HR-SBD-LIC-01.cadenas.internal", "cad");
+                    populateLicenseTable("Inventor", "27000", "server.example.com", "cad");
                     // echo "</div>";
                     break;
                 case 'solidworks':
                     // echo "<div id=" . "solidworks"  . "class=tabcontent>";
-                    populateLicenseTable("Solidworks", "25734", "HR-SBD-LIC-01.cadenas.internal", "cad");
+                    populateLicenseTable("Solidworks", "25734", "server.example.com", "cad");
                     // echo "</div>";
                     break;
                 case 'nx':
-                    populateLicenseTable("NX", "28000", "HR-SBD-LIC-01.cadenas.internal", "cad");
+                    populateLicenseTable("NX", "28000", "server.example.com", "cad");
                     break;
                 case 'creo':
-                    populateLicenseTable("Creo Parametric", "7788", "HR-SBD-LIC-01.cadenas.internal", "cad");
+                    populateLicenseTable("Creo Parametric", "7788", "server.example.com", "cad");
                     break;
                 case 'revit':
-                    populateLicenseTable("Revit", "27000", "HR-SBD-LIC-01.cadenas.internal", "cad");
+                    populateLicenseTable("Revit", "27000", "server.example.com", "cad");
                     break;
                 case 'all':
-                    populateLicenseTable("Revit", "27000", "HR-SBD-LIC-01.cadenas.internal", "all");
+                    populateLicenseTable("Revit", "27000", "server.example.com", "all");
                     break;
                 default:
             }
