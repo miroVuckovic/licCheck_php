@@ -3,23 +3,20 @@
 function initQuery()
 {
 
-    if (isset($_GET['page'])) {
+if (isset($_GET['cad'])) {
 
-        $pageParam = $_GET['page'];
+        readfile("../app/views/nav.html");
 
-        if ($pageParam == 'cad-lics') {
-            readfile("../app/views/nav.html");
+        global $cadParam;
+        $cadParam = $_GET['cad'];
+
+        if ($cadParam == 'all') {
             echo "</main>";
             echo "</body>";
+
+            readfile("../app/views/footer.html");
+            exit;
         }
-
-        readfile("../app/views/footer.html");
-        exit;
-
-
-        if (isset($_GET['cad'])) {
-
-            $cadParam = $_GET['cad'];
 
             // $url = $_SERVER['PHP_SELF'] . '?cad=' . $cadParam;
 
