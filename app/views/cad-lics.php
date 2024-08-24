@@ -2,7 +2,7 @@
 
 function initQuery()
 {
-    readfile("../app/views/nav.html");
+    readfile("app/views/nav.html");
 
     if (isset($_GET['cad'])) {       
 
