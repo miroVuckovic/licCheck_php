@@ -50,6 +50,7 @@ body {
 
 #logo-sidebar {
   position: fixed;
+  top: 7px;
   left: 8px;
   border: 1px solid black;
   width: 190px;

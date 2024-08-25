@@ -12,7 +12,12 @@ echo "<a id=logo-sidebar href='index.php'>  <img src='public/images/clc_logo.png
 echo "<aside class='sidebar'>";
 
 switch ($role_id) {
-
+    case 1:
+        echo $cad_lics;
+        echo $cad_admin;
+        echo $user_admin;
+        echo $user_training;
+        break;
     case 2:
         echo $cad_lics;
         echo $user_training;
@@ -23,9 +28,6 @@ switch ($role_id) {
         break;
     default:
         echo $cad_lics;
-        echo $cad_admin;
-        echo $user_admin;
-        echo $user_training;
         break;
 }
 

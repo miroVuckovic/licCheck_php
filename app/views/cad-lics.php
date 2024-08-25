@@ -1,5 +1,7 @@
 <?php
 
+include "app/helpers/query-cad-lics.php";
+
 function initQuery()
 {
     readfile("app/views/nav.html");

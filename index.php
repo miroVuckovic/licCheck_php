@@ -2,9 +2,7 @@
 
 session_start();
 
-if (isset($_SESSION['logged_in'])) {
-
-    include "app/helpers/query-cad-lics.php";
+    include "app/helpers/misc.php";
 
     readfile("app/views/head.html");
 
@@ -17,6 +15,8 @@ if (isset($_SESSION['logged_in'])) {
     header_remove();
 
     echo "<main>";
+
+    if (isset($_SESSION['logged_in'])) {
 
     if (isset($_GET['page'])) {
         
@@ -38,7 +38,7 @@ if (isset($_SESSION['logged_in'])) {
 
         }
     }
-    
+
     echo "</main>";
     echo "</body>";
 
@@ -46,8 +46,9 @@ if (isset($_SESSION['logged_in'])) {
 
 } else {
     // echo 'session:' . $_SESSION['logged_in'];
-    $path = __DIR__ . '/app/views/login.html';
+    // $path = __DIR__ . '/app/views/login.html';
     // echo $path;
-    readfile($path);
-    die;
+    // readfile($path);
+    // die;
+    include "app/views/cad-lics.php";
 }
