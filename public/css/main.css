@@ -260,3 +260,25 @@ a {
 .video-thumbnail {
 
 }
+
+#cad-list {
+  height: 300px;
+  width: 50%;
+  float: left;
+  text-align: left;
+  padding-bottom: 10px;
+}
+
+label {
+  
+}
+
+#cad-properties {
+  height: auto;
+  width: auto;
+  position: fixed;
+  left: 60%;
+  border: 1px solid black;
+  text-align: left;
+  padding: 20px;
+}

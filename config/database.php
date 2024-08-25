@@ -8,8 +8,8 @@
 // ];
 
 // Database connection
-$host = 'localhost:5215';
-$dbname = 'liccheck';
+$host = 'localhost';
+$dbname = 'licCheck';
 $username = 'root'; // Replace with your DB username
 $password = ''; // Replace with your DB password
 

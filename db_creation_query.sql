@@ -42,6 +42,22 @@ INSERT INTO permissions (permission_name) VALUES ('CREATE_USER'), ('EDIT_USER'),
 
 INSERT INTO users (username,password,email) VALUES ('admin','$2y$10$j6SPOOVZ4puJJ9BI.Ed.cuIFvsNNEIWIvkIHvqQw9vqRPnQ29q1he','admin@admin.com');
 INSERT INTO user_roles (user_id,role_id) VALUES (1,1);
+-- admin login:
+-- login: admin@admin.com
+-- pass: admin
 
 INSERT INTO users (username,password,email) VALUES ('user1','$2y$10$1jlC2NpKDfl5SqfEw6QPhuk4N/qTqtsMXEAzStUFer1dp7rzfubwS','user1@user1.com');
 INSERT INTO user_roles (user_id,role_id) VALUES (2,2);
+-- user login:
+-- login: user1@user1.com
+-- pass: user1
+
+CREATE TABLE cad_systems (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cad_name VARCHAR(255) NOT NULL,
+    port INT NOT NULL,
+    server VARCHAR(255) NOT NULL,
+    product VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+

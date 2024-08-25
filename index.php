@@ -38,6 +38,7 @@ if (isset($_SESSION['logged_in'])) {
 
         }
     }
+    
     echo "</main>";
     echo "</body>";
 

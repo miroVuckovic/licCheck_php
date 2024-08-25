@@ -2,6 +2,8 @@
 
 // session_start();
 
+
+
 $demoMode = true;
 
 echo "<header class='account-header'>";
@@ -22,15 +24,16 @@ if (isset($_SESSION['username'])) {
     echo "Korisnik: ";
     echo htmlspecialchars($username);
     echo "<br>";
-    echo "Rola: " . htmlspecialchars($role_desc);
+    echo "Rola: " . translateRoleDescriptions(htmlspecialchars($role_desc));
     echo "</div>";
 } else {
     echo "<div class='login'>";   
     echo "Korisnik nije ulogiran.";
+    echo "<a class='login' href='app/models/login.php'>Prijava</a>";
     echo "</div>";
 }
 
-echo "<a class='login' href='app/models/logout.php'>Log out</a>";
+echo "<a class='login' href='app/models/logout.php'>Odjava</a>";
 
 echo "</figure>";
 echo "</header>";

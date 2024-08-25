@@ -1,67 +1,80 @@
 <?php
 // Include the database connection
-include 'config/database.php';
+// include 'config/database.php';
 
-if ($action === 'delete_user' && isset($_POST['user_id'])) {
-        $user_id = $_POST['user_id'];
+$host = 'localhost';
+$dbname = 'liccheck';
+$username = 'root'; // Replace with your DB username
+$password = ''; // Replace with your DB password
 
-        try {
-            // Delete user roles
-            $stmt = $pdo->prepare("DELETE FROM user_roles WHERE user_id = ?");
-            $stmt->execute([$user_id]);
-
-            // Delete user
-            $stmt = $pdo->prepare("DELETE FROM users WHERE id = ?");
-            $stmt->execute([$user_id]);
-
-            echo "User deleted successfully!";
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    } elseif ($action === 'update_roles' && isset($_POST['user_id'])) {
-        $user_id = $_POST['user_id'];
-        $roles = $_POST['roles'] ?? [];
-
-        try {
-            // Delete existing roles for the user
-            $stmt = $pdo->prepare("DELETE FROM user_roles WHERE user_id = ?");
-            $stmt->execute([$user_id]);
-
-            // Insert the new roles
-            foreach ($roles as $role_id) {
-                $stmt = $pdo->prepare("INSERT INTO user_roles (user_id, role_id) VALUES (?, ?)");
-                $stmt->execute([$user_id, $role_id]);
-            }
-
-            echo "User roles updated successfully!";
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    }
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Error connecting to database: " . $e->getMessage());
+}
 
 
-// Fetch users and their roles
-$usersStmt = $pdo->query("SELECT users.id, users.username, users.email, GROUP_CONCAT(roles.role_name SEPARATOR ', ') as roles
+// if ($action === 'delete_user' && isset($_POST['user_id'])) {
+//         $user_id = $_POST['user_id'];
+
+//         try {
+//             // Delete user roles
+//             $sql = $pdo->prepare("DELETE FROM user_roles WHERE user_id = ?");
+//             $sql->execute([$user_id]);
+
+//             // Delete user
+//             $sql = $pdo->prepare("DELETE FROM users WHERE id = ?");
+//             $sql->execute([$user_id]);
+
+//             echo "User deleted successfully!";
+//         } catch (PDOException $e) {
+//             echo "Error: " . $e->getMessage();
+//         }
+//     } elseif ($action === 'update_roles' && isset($_POST['user_id'])) {
+//         $user_id = $_POST['user_id'];
+//         $roles = $_POST['roles'] ?? [];
+
+//         try {
+//             // Delete existing roles for the user
+//             $sql = $pdo->prepare("DELETE FROM user_roles WHERE user_id = ?");
+//             $sql->execute([$user_id]);
+
+//             // Insert the new roles
+//             foreach ($roles as $role_id) {
+//                 $sql = $pdo->prepare("INSERT INTO user_roles (user_id, role_id) VALUES (?, ?)");
+//                 $sql->execute([$user_id, $role_id]);
+//             }
+
+//             echo "User roles updated successfully!";
+//         } catch (PDOException $e) {
+//             echo "Error: " . $e->getMessage();
+//         }
+//     }
+
+
+// Dohvaćanje usera i rola.
+$userssql = $pdo->query("SELECT users.id, users.username, users.email, GROUP_CONCAT(roles.role_name SEPARATOR ', ') as roles
                           FROM users
                           LEFT JOIN user_roles ON users.id = user_roles.user_id
                           LEFT JOIN roles ON user_roles.role_id = roles.id
                           GROUP BY users.id");
-$users = $usersStmt->fetchAll(PDO::FETCH_ASSOC);
+$users = $userssql->fetchAll(PDO::FETCH_ASSOC);
 
-// Fetch roles for the role selection
-$rolesStmt = $pdo->query("SELECT * FROM roles");
-$roles = $rolesStmt->fetchAll(PDO::FETCH_ASSOC);
+// Dohvaćanje rola za selekciju.
+$rolessql = $pdo->query("SELECT * FROM roles");
+$roles = $rolessql->fetchAll(PDO::FETCH_ASSOC);
 ?>
     <h1>User Management</h1>
 
-    <!-- Current Users and Roles -->
-    <h2>Current Users</h2>
+    <!-- Korisnici i role -->
+    <h2>Korisnici</h2>
     <?php if (!empty($users)): ?>
         <table border="1">
             <tr>
                 <th>Username</th>
                 <th>Email</th>
-                <th>Roles</th>
+                <th>Role</th>
                 <th>Actions</th>
             </tr>
             <?php foreach ($users as $user): ?>

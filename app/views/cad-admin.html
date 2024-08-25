@@ -1,29 +1,33 @@
 
-    <h2>Sample Form</h2>
-    <form action="#" method="POST">
+    <h2>CAD software</h2>
+    <form action="save-cad" method="POST">
         <!-- Checked Listbox -->
-        <fieldset>
-            <legend>Select Options:</legend>
-            <label><input type="checkbox" name="option1" value="Option 1"> Option 1</label><br>
-            <label><input type="checkbox" name="option2" value="Option 2"> Option 2</label><br>
-            <label><input type="checkbox" name="option3" value="Option 3"> Option 3</label><br>
-            <label><input type="checkbox" name="option4" value="Option 4"> Option 4</label>
+        <fieldset id="cad-list">
+            <legend>Odaberite:</legend>
+            <label><input type="checkbox" name="option1" value="AutoCAD">AutoCAD</label><br>
+            <label><input type="checkbox" name="option2" value="Inventor">Inventor</label><br>
+            <label><input type="checkbox" name="option3" value="SolidWorks">SolidWorks</label><br>
+            <label><input type="checkbox" name="option4" value="NX">NX</label><br>
+            <label><input type="checkbox" name="option4" value="Creo Parametric">Creo Parametric</label><br>
+            <label><input type="checkbox" name="option4" value="Revit">Revit</label><br>
         </fieldset>
         <br>
+        <figure id="cad-properties">
         <!-- Textboxes -->
-        <label for="textbox1">Textbox 1:</label>
-        <input type="text" id="textbox1" name="textbox1"><br><br>
+        <label for="textbox1">CAD:</label>
+        <input type="text" id="cad-name" name="cad-name"><br><br>
 
-        <label for="textbox2">Textbox 2:</label>
-        <input type="text" id="textbox2" name="textbox2"><br><br>
+        <label for="textbox2">Port:</label>
+        <input type="text" id="cad-port" name="cad-port"><br><br>
 
-        <label for="textbox3">Textbox 3:</label>
-        <input type="text" id="textbox3" name="textbox3"><br><br>
+        <label for="textbox3">Server:</label>
+        <input type="text" id="cad-server" name="cad-server"><br><br>
 
-        <label for="textbox4">Textbox 4:</label>
-        <input type="text" id="textbox4" name="textbox4"><br><br>
+        <label for="textbox4">Product:</label>
+        <input type="text" id="cad-product" name="cad-product"><br><br>
 
         <!-- Submit Button -->
         <button type="submit">Submit</button>
+    </figure>
     </form>
 
