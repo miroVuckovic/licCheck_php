@@ -50,5 +50,5 @@ session_start();
     // echo $path;
     // readfile($path);
     // die;
-    include "app/views/cad-lics.php";
+    include "app/views/training.html";
 }

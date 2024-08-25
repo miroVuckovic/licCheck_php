@@ -27,7 +27,7 @@ switch ($role_id) {
         echo $user_training;
         break;
     default:
-        echo $cad_lics;
+        echo $user_training;
         break;
 }
 
