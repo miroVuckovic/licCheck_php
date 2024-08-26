@@ -26,7 +26,7 @@ session_start();
                 readfile("app/views/training.html");
                 break;
             case "user-admin":
-                readfile("app/views/user-admin.php");
+                include "app/views/user-admin.php";
                 break;
             case "cad-admin";
                 readfile("app/views/cad-admin.html");
