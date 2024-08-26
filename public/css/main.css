@@ -283,3 +283,13 @@ label {
   text-align: left;
   padding: 20px;
 }
+
+.user-mgmt-container {
+  border: 1px solid black;
+  overflow-y: auto;
+  height: calc(100vh - 150px - 20px);
+}
+
+.user-table-container {
+  overflow-y: auto;
+}

@@ -1,19 +1,8 @@
 <?php
 
-// Database connection
-$host = 'localhost';
-$dbname = 'licCheck';
-$username = 'root'; // Replace with your DB username
-$password = ''; // Replace with your DB password
+require("config/database_pdo.php");
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Error connecting to database: " . $e->getMessage());
-}
-
-// Handle form submission for adding or updating users
+// Forma za dodavanje korisnika
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     $action = $_POST['action'];
 
@@ -24,17 +13,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         $roles = $_POST['roles'] ?? [];
 
         try {
-            // Insert user into the users table
-            $stmt = $pdo->prepare("INSERT INTO users (username, password, email) VALUES (?, ?, ?)");
-            $stmt->execute([$username, $password, $email]);
+            $sql = $pdo->prepare("INSERT INTO users (username, password, email) VALUES (?, ?, ?)");
+            $sql->execute([$username, $password, $email]);
 
             // Get the last inserted user id
             $user_id = $pdo->lastInsertId();
 
             // Insert user roles into the user_roles table
             foreach ($roles as $role_id) {
-                $stmt = $pdo->prepare("INSERT INTO user_roles (user_id, role_id) VALUES (?, ?)");
-                $stmt->execute([$user_id, $role_id]);
+                $sql = $pdo->prepare("INSERT INTO user_roles (user_id, role_id) VALUES (?, ?)");
+                $sql->execute([$user_id, $role_id]);
             }
 
             echo "User created successfully!";
@@ -46,12 +34,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
         try {
             // Delete user roles
-            $stmt = $pdo->prepare("DELETE FROM user_roles WHERE user_id = ?");
-            $stmt->execute([$user_id]);
+            $sql = $pdo->prepare("DELETE FROM user_roles WHERE user_id = ?");
+            $sql->execute([$user_id]);
 
             // Delete user
-            $stmt = $pdo->prepare("DELETE FROM users WHERE id = ?");
-            $stmt->execute([$user_id]);
+            $sql = $pdo->prepare("DELETE FROM users WHERE id = ?");
+            $sql->execute([$user_id]);
 
             echo "User deleted successfully!";
         } catch (PDOException $e) {
@@ -63,13 +51,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
         try {
             // Delete existing roles for the user
-            $stmt = $pdo->prepare("DELETE FROM user_roles WHERE user_id = ?");
-            $stmt->execute([$user_id]);
+            $sql = $pdo->prepare("DELETE FROM user_roles WHERE user_id = ?");
+            $sql->execute([$user_id]);
 
             // Insert the new roles
             foreach ($roles as $role_id) {
-                $stmt = $pdo->prepare("INSERT INTO user_roles (user_id, role_id) VALUES (?, ?)");
-                $stmt->execute([$user_id, $role_id]);
+                $sql = $pdo->prepare("INSERT INTO user_roles (user_id, role_id) VALUES (?, ?)");
+                $sql->execute([$user_id, $role_id]);
             }
 
             echo "User roles updated successfully!";
@@ -92,14 +80,9 @@ $rolesStmt = $pdo->query("SELECT * FROM roles");
 $roles = $rolesStmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Management</title>
-</head>
-<body>
+<div class="user-mgmt-container">
+
+
     <h1>User Management</h1>
 
     <!-- Add New User Form -->
@@ -126,45 +109,49 @@ $roles = $rolesStmt->fetchAll(PDO::FETCH_ASSOC);
 
     <!-- Current Users and Roles -->
     <h2>Current Users</h2>
-    <?php if (!empty($users)): ?>
-        <table border="1">
-            <tr>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Actions</th>
-            </tr>
-            <?php foreach ($users as $user): ?>
+    <div class="user-table-container">
+
+
+        <?php if (!empty($users)): ?>
+            <table border="1">
                 <tr>
-                    <td><?= htmlspecialchars($user['username']); ?></td>
-                    <td><?= htmlspecialchars($user['email']); ?></td>
-                    <td><?= htmlspecialchars($user['roles']); ?></td>
-                    <td>
-                        <!-- Update Roles Form -->
-                        <form action="" method="POST" style="display:inline;">
-                            <input type="hidden" name="action" value="update_roles">
-                            <input type="hidden" name="user_id" value="<?= $user['id']; ?>">
-                            <label for="roles_<?= $user['id']; ?>">Change Roles:</label><br>
-                            <?php foreach ($roles as $role): ?>
-                                <input type="checkbox" id="role_<?= $user['id'] . '_' . $role['id']; ?>" name="roles[]" value="<?= $role['id']; ?>" <?= strpos($user['roles'], $role['role_name']) !== false ? 'checked' : ''; ?>>
-                                <label for="role_<?= $user['id'] . '_' . $role['id']; ?>"><?= $role['role_name']; ?></label><br>
-                            <?php endforeach; ?>
-                            <input type="submit" value="Update Roles">
-                        </form>
-
-                        <!-- Delete User Form -->
-                        <form action="" method="POST" style="display:inline;">
-                            <input type="hidden" name="action" value="delete_user">
-                            <input type="hidden" name="user_id" value="<?= $user['id']; ?>">
-                            <input type="submit" value="Delete User" onclick="return confirm('Are you sure you want to delete this user?');">
-                        </form>
-                    </td>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Roles</th>
+                    <th>Actions</th>
                 </tr>
-            <?php endforeach; ?>
-        </table>
-    <?php else: ?>
-        <p>No users found.</p>
-    <?php endif; ?>
+                <?php foreach ($users as $user): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($user['username']); ?></td>
+                        <td><?= htmlspecialchars($user['email']); ?></td>
+                        <td><?= htmlspecialchars($user['roles']); ?></td>
+                        <td>
+                            <!-- Update Roles Form -->
+                            <form action="" method="POST" style="display:inline;">
+                                <input type="hidden" name="action" value="update_roles">
+                                <input type="hidden" name="user_id" value="<?= $user['id']; ?>">
+                                <label for="roles_<?= $user['id']; ?>">Change Roles:</label><br>
+                                <?php foreach ($roles as $role): ?>
+                                    <input type="checkbox" id="role_<?= $user['id'] . '_' . $role['id']; ?>" name="roles[]"
+                                        value="<?= $role['id']; ?>" <?= strpos($user['roles'], $role['role_name']) !== false ? 'checked' : ''; ?>>
+                                    <label for="role_<?= $user['id'] . '_' . $role['id']; ?>"><?= $role['role_name']; ?></label><br>
+                                <?php endforeach; ?>
+                                <input type="submit" value="Update Roles">
+                            </form>
 
-</body>
-</html>
+                            <!-- Delete User Form -->
+                            <form action="" method="POST" style="display:inline;">
+                                <input type="hidden" name="action" value="delete_user">
+                                <input type="hidden" name="user_id" value="<?= $user['id']; ?>">
+                                <input type="submit" value="Delete User"
+                                    onclick="return confirm('Are you sure you want to delete this user?');">
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        <?php else: ?>
+            <p>No users found.</p>
+        <?php endif; ?>
+    </div>
+</div>

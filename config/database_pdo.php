@@ -1,17 +1,9 @@
 <?php
 
-// return [
-//     'host' => 'localhost',
-//     'database' => 'licCheck',
-//     'username' => 'root',
-//     'password' => '',
-// ];
-
-// Database connection
 $host = 'localhost';
 $dbname = 'licCheck';
-$username = 'root'; // Replace with your DB username
-$password = ''; // Replace with your DB password
+$username = 'root'; 
+$password = ''; 
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
