@@ -16,16 +16,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             $sql = $pdo->prepare("INSERT INTO users (username, password, email) VALUES (?, ?, ?)");
             $sql->execute([$username, $password, $email]);
 
-            // Get the last inserted user id
             $user_id = $pdo->lastInsertId();
 
-            // Insert user roles into the user_roles table
             foreach ($roles as $role_id) {
                 $sql = $pdo->prepare("INSERT INTO user_roles (user_id, role_id) VALUES (?, ?)");
                 $sql->execute([$user_id, $role_id]);
             }
 
-            echo "User created successfully!";
+            echo "Korisnik uspješno dodan!";
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -41,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             $sql = $pdo->prepare("DELETE FROM users WHERE id = ?");
             $sql->execute([$user_id]);
 
-            echo "User deleted successfully!";
+            echo "Korisnik uspješno obrisan!";
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -50,17 +48,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         $roles = $_POST['roles'] ?? [];
 
         try {
-            // Delete existing roles for the user
             $sql = $pdo->prepare("DELETE FROM user_roles WHERE user_id = ?");
             $sql->execute([$user_id]);
 
-            // Insert the new roles
             foreach ($roles as $role_id) {
                 $sql = $pdo->prepare("INSERT INTO user_roles (user_id, role_id) VALUES (?, ?)");
                 $sql->execute([$user_id, $role_id]);
             }
 
-            echo "User roles updated successfully!";
+            echo "Korisničke role uspješto ažurirane!";
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -82,43 +78,44 @@ $roles = $rolesStmt->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="user-mgmt-container">
 
+    <h1>Administracija korisnika</h1>
 
-    <h1>User Management</h1>
+    <h2>Dodajte novog korisnika</h2>
 
-    <!-- Add New User Form -->
-    <h2>Add New User</h2>
-    <form action="" method="POST">
+    <form id="form-login" action="" method="POST">
+        <div id="form-login-input">
         <input type="hidden" name="action" value="add_user">
-        <label for="username">Username:</label>
+        <label class="login-input" for="username">Korisničko ime:</label>
         <input type="text" id="username" name="username" required><br><br>
 
-        <label for="password">Password:</label>
+        <label class="login-input" for="password">Lozinka:</label>
         <input type="password" id="password" name="password" required><br><br>
 
-        <label for="email">Email:</label>
+        <label class="login-input" for="email">Email:</label>
         <input type="email" id="email" name="email" required><br><br>
 
-        <label for="roles">Assign Roles:</label><br>
+        <label class="login-input" for="roles">Dodjela rola:</label><br><br>
         <?php foreach ($roles as $role): ?>
             <input type="checkbox" id="role_<?= $role['id']; ?>" name="roles[]" value="<?= $role['id']; ?>">
             <label for="role_<?= $role['id']; ?>"><?= $role['role_name']; ?></label><br>
         <?php endforeach; ?>
         <br>
-        <input type="submit" value="Create User">
+        <input type="submit" value="Dodaj korisnika">
+        </div>
     </form>
 
     <!-- Current Users and Roles -->
-    <h2>Current Users</h2>
+    <h2>Sadašnji korisnici</h2>
     <div class="user-table-container">
 
 
         <?php if (!empty($users)): ?>
             <table border="1">
                 <tr>
-                    <th>Username</th>
+                    <th>Korisničko ime</th>
                     <th>Email</th>
-                    <th>Roles</th>
-                    <th>Actions</th>
+                    <th>Role</th>
+                    <th>Radnje</th>
                 </tr>
                 <?php foreach ($users as $user): ?>
                     <tr>
@@ -126,25 +123,25 @@ $roles = $rolesStmt->fetchAll(PDO::FETCH_ASSOC);
                         <td><?= htmlspecialchars($user['email']); ?></td>
                         <td><?= htmlspecialchars($user['roles']); ?></td>
                         <td>
-                            <!-- Update Roles Form -->
+
                             <form action="" method="POST" style="display:inline;">
                                 <input type="hidden" name="action" value="update_roles">
                                 <input type="hidden" name="user_id" value="<?= $user['id']; ?>">
-                                <label for="roles_<?= $user['id']; ?>">Change Roles:</label><br>
+                                <label for="roles_<?= $user['id']; ?>">Promjena rola:</label><br>
                                 <?php foreach ($roles as $role): ?>
                                     <input type="checkbox" id="role_<?= $user['id'] . '_' . $role['id']; ?>" name="roles[]"
                                         value="<?= $role['id']; ?>" <?= strpos($user['roles'], $role['role_name']) !== false ? 'checked' : ''; ?>>
                                     <label for="role_<?= $user['id'] . '_' . $role['id']; ?>"><?= $role['role_name']; ?></label><br>
                                 <?php endforeach; ?>
-                                <input type="submit" value="Update Roles">
+                                <input type="submit" value="Ažuriraj role">
                             </form>
 
-                            <!-- Delete User Form -->
+
                             <form action="" method="POST" style="display:inline;">
                                 <input type="hidden" name="action" value="delete_user">
                                 <input type="hidden" name="user_id" value="<?= $user['id']; ?>">
-                                <input type="submit" value="Delete User"
-                                    onclick="return confirm('Are you sure you want to delete this user?');">
+                                <input type="submit" value="Obriši korisnika"
+                                    onclick="return confirm('Sigurno želite obrisati ovog korisnika?');">
                             </form>
                         </td>
                     </tr>

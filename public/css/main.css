@@ -231,10 +231,10 @@ a {
   left: 20px;
   color: white;
   border: 3px solid white;
-  font-size:xx-large;
+  font-size: xx-large;
   font-weight: bolder;
   margin: 0px;
-  width:fit-content;
+  width: fit-content;
   /* padding-right: 50px; */
 }
 
@@ -246,39 +246,24 @@ a {
   height: calc(100vh - 150px - 70px);
 }
 
-.video-item {
-
-}
-
-.video-title {
-
-}
-
-.video-description {
-
-}
-
-.video-thumbnail {
-
-}
 
 #cad-list {
   height: 300px;
-  width: 50%;
+  width: 20%;
   float: left;
   text-align: left;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
+  border: 1px solid black;
 }
 
-label {
-  
-}
+
 
 #cad-properties {
-  height: auto;
-  width: auto;
+  height: 300px;
+  width: 300px;
   position: fixed;
-  left: 60%;
+  left: 30%;
+  top: 161px;
   border: 1px solid black;
   text-align: left;
   padding: 20px;
@@ -292,4 +277,33 @@ label {
 
 .user-table-container {
   overflow-y: auto;
+}
+
+
+#form-login-input {
+  /* border: 1px solid red; */
+  width: 20%;
+  position: relative;
+  left: 40%;
+  text-align: left;
+}
+
+
+
+#username {
+  /* border: 1px solid red; */
+  position: relative;
+  left: 10px;
+}
+
+#password {
+  /* border: 1px solid red; */
+  position: relative;
+  left: 58px;
+}
+
+#email {
+  /* border: 1px solid red; */
+  position: relative;
+  left: 72px;
 }
