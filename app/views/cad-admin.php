@@ -2,7 +2,6 @@
 
 require("config/database_pdo.php");
 
-// Forma za dodavanje korisnika
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
     $action = $_POST['action'];
@@ -19,21 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             $cad_active = false;
         }
 
-
         try {
             $sql = $pdo->prepare("INSERT INTO cad_systems (cad_name, display_name, port, server, product, active) VALUES (?, ?, ?, ?, ?, ?)");
             $sql->execute([$cad_name, $cad_display_name, $cad_port, $cad_server, $cad_product, $cad_active]);
 
-            // Get the last inserted user id
             $cad_id = $pdo->lastInsertId();
 
-            // // Insert user roles into the user_roles table
-            // foreach ($roles as $role_id) {
-            //     $sql = $pdo->prepare("INSERT INTO user_roles (user_id, role_id) VALUES (?, ?)");
-            //     $sql->execute([$user_id, $role_id]);
-            // }
-
-            echo "CAD added successfully!";
+            echo "CAD uspješno dodan!";
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -41,34 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         $cad_id = $_POST['cad_id'];
 
         try {
-            // Delete user roles
-            // $sql = $pdo->prepare("DELETE FROM user_roles WHERE user_id = ?");
-            // $sql->execute([$user_id]);
-
-            // Delete user
             $sql = $pdo->prepare("DELETE FROM cad_systems WHERE id = ?");
             $sql->execute([$cad_id]);
 
-            echo "CAD deleted successfully!";
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    } elseif ($action === 'update_roles' && isset($_POST['user_id'])) {
-        $user_id = $_POST['user_id'];
-        $roles = $_POST['roles'] ?? [];
-
-        try {
-            // Delete existing roles for the user
-            $sql = $pdo->prepare("DELETE FROM user_roles WHERE user_id = ?");
-            $sql->execute([$user_id]);
-
-            // Insert the new roles
-            foreach ($roles as $role_id) {
-                $sql = $pdo->prepare("INSERT INTO user_roles (user_id, role_id) VALUES (?, ?)");
-                $sql->execute([$user_id, $role_id]);
-            }
-
-            echo "User roles updated successfully!";
+            echo "CAD uspješno obrisan!";
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -85,19 +52,18 @@ $cads = $cadQuery->fetchAll(PDO::FETCH_ASSOC);
 <div class="cad-mgmt-container">
 
 
-    <h1>CAD License Check Management</h1>
+    <h1>Administracija licenci CAD-ova</h1>
 
-    <!-- Add New User Form -->
-    <h2>Add New CAD</h2>
-    <form action="" method="POST">
+    <h2>Dodajte novi CAD:</h2>
+    <form id="cad-add-user-form" action="" method="POST">
 
         <input type="hidden" name="action" value="add_cad">
 
-        <label for="cad-name">CAD name:</label>
+        <label for="cad-name">Ime CAD-a:</label>
         <input type="text" id="cad-name" name="cad-name" required><br><br>
 
 
-        <label for="cad_display_name">Display name:</label>
+        <label for="cad_display_name">Ime za prikaz:</label>
         <input type="text" id="cad_display_name" name="cad_display_name" required><br><br>
 
         <label for="cad-port">Port:</label>
@@ -106,32 +72,32 @@ $cads = $cadQuery->fetchAll(PDO::FETCH_ASSOC);
         <label for="cad-server">Server:</label>
         <input type="text" id="cad-server" name="cad-server" required><br><br>
 
-        <label for="cad-product">Product:</label>
+        <label for="cad-product">Proizvod:</label>
         <input type="text" id="cad-product" name="cad-product" required><br><br>
 
-        <label for="roles">Activate?:</label><br>
+        <label for="roles">Aktiviraj?:</label><br>
 
         <input type="checkbox" id="cad-active" name="cad-active" value="true">
 
         <br>
         <br>
-        <input type="submit" value="Add CAD">
+        <input type="submit" value="Dodaj CAD">
     </form>
 
 
-    <h2>Current CADs</h2>
+    <h2>Dodani CAD-ovi</h2>
     <div class="cad-table-container">
 
         <?php if (!empty($cads)): ?>
             <table border="1">
                 <tr>
                     <th>CAD</th>
-                    <th>Display name</th>
+                    <th>Ime za prikaz</th>
                     <th>Port</th>
                     <th>Server</th>
-                    <th>Product</th>
+                    <th>Proizvod</th>
                     <th>Status</th>
-                    <th>Actions</th>
+                    <th>Radnje</th>
                 </tr>
                 <?php foreach ($cads as $cad): ?>
                     <tr>
@@ -146,16 +112,16 @@ $cads = $cadQuery->fetchAll(PDO::FETCH_ASSOC);
                             <form action="" method="POST" style="display:inline;">
                                 <input type="hidden" name="action" value="update-status">
                                 <input type="hidden" name="cad_id" value="<?= $cad['id']; ?>">
-                                <label for="roles_<?= $cad['id']; ?>">Change status:</label><br>
-                                <input type="submit" value="Update CAD">
+                                <label for="roles_<?= $cad['id']; ?>">Promijeni status:</label><br>
+                                <input type="submit" value="Ažuriraj CAD">
                             </form>
 
                             <!-- Delete User Form -->
                             <form action="" method="POST" style="display:inline;">
                                 <input type="hidden" name="action" value="delete_cad">
                                 <input type="hidden" name="cad_id" value="<?= $cad['id']; ?>">
-                                <input type="submit" value="Delete CAD"
-                                    onclick="return confirm('Are you sure you want to delete this CAD?');">
+                                <input type="submit" value="Obriši CAD"
+                                    onclick="return confirm('Sigurno želite obrisati ovaj CAD?');">
                             </form>
                         </td>
                     </tr>

@@ -22,7 +22,7 @@ body {
   position: fixed;
   top: 98px;
   width: 190px;
-  height: calc(100vh - 102px);
+  height: 100vh;
   /* padding-left: 15px; */
   /* margin-left: 15px; */
   /* float: left; */
@@ -151,6 +151,7 @@ main {
 
 .table-container {
   position: relative;
+  left: 5px;
   top: 50px;
   border: 1px solid black;
   overflow-y: auto;
@@ -287,12 +288,43 @@ a {
   position: relative;
   left: 5px;
 }
+
+#cad-add-user-form {
+  position: relative;
+  left: calc(50% - 250px);
+  /* border: 1px solid black; */
+  width:500px;
+  /* text-align: left; */
+}
+
 .cad-table-container {
   /* border: 1px solid black; */
   overflow-y: auto;
   height: 300px;
   position: relative;
   left: 5px;
+}
+
+#cad-name  {
+  position: relative;
+  left: 50px;
+}
+
+#cad_display_name  {
+  position: relative;
+  left: 41px;
+}
+#cad-port {
+  position: relative;
+  left: 74px;
+}
+ #cad-server {
+  position: relative;
+  left: 65px;
+}
+ #cad-product  {
+  position: relative;
+  left: 58px;
 }
 
 

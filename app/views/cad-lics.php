@@ -4,7 +4,6 @@ require("config/database_pdo.php");
 
 require("app/helpers/query-cad-lics.php");
 
-// Fetch CADs and data
 $cadQuery = $pdo->query("SELECT id, cad_name, display_name, port, server, product, active FROM cad_systems");
 $cads = $cadQuery->fetchAll(PDO::FETCH_ASSOC);
 
@@ -38,20 +37,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cad']) && isset($_POST
     $cadProduct = $_POST['cad-product'];
     $cadDisplayName = $_POST['cad-display-name'];
 
-    initQuery($cadName, $cadPort, $cadServer, $cadProduct);
+    initQuery($cadName, $cadPort, $cadServer, $cadProduct, $cadDisplayName);
 }
 
-function initQuery($cad, $port, $server, $product)
+function initQuery($cad, $port, $server, $product, $displayName)
 {
-    // Handle the query here
-    // Replace `$_GET` with the necessary logic if needed
-    // echo "Initiating query with CAD: $cad, Port: $port, Server: $server, Product: $product";
-    // Implement the query or function you need here
-    populateLicenseTable($cad, $port, $server, $product);
+    populateLicenseTable($cad, $port, $server, $product,$displayName);
 }
 
-// Make sure to close HTML tags correctly
 echo "<script src='app/helpers/page_loader.js'></script>";
 
-?>
 

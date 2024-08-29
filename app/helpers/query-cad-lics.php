@@ -2,7 +2,7 @@
 
 // include "misc.php";
 
-function populateLicenseTable($cadSystem, $port, $server, $product)
+function populateLicenseTable($cadSystem, $port, $server, $product, $displayName)
 {
 
     // header("Refresh: 5; url='index.php?cad=$cadSystem'");
@@ -20,26 +20,24 @@ function populateLicenseTable($cadSystem, $port, $server, $product)
 
     echo '<aside id="lic-summary">';
 
-    echo "License usage information for :";
+    echo "Informacije o upotrebi licenci za:";
     echo "<br>";
-    echo $cadSystem;
+    echo "<br>";
+    echo $displayName;
     echo "<br>";
     echo "<br>";
 
     if (!file_exists($localFullPath)) {
-        echo "ERROR - Background service for " . $cadSystem . " doesn't exist!";
+        echo "ERROR - Pozadinski servis za " . $displayName . " ne postoji!";
         echo "<br>";
     }
 
-    // Define the command to execute
     $command = "$localFullPath lmstat -a -c $port@$server -f cad";
 
-    // Execute the command and capture the output
     exec($command, $output, $return_var);
 
-    // Check if the command executed successfully
     if ($return_var !== 0) {
-        echo "<p>There was an error executing the command.</p>";
+        echo "<p>Greška pri inicijalizaciji komande.</p>";
         exit(1);
     }
 
@@ -47,19 +45,17 @@ function populateLicenseTable($cadSystem, $port, $server, $product)
 
     // echo $productName;
 
-    // Filter the output for lines containing the keyword "$product"
     $filteredOutputLicNo = array_filter($output, function ($line) use ($productString) {
         return stripos($line, $productString) !== false;
     });
 
     if (empty($filteredOutputLicNo)) {
 
-        echo "<p>All licenses available</p>";
+        echo "<p>Sve licence dostupne.</p>";
     } else {
 
         foreach ($filteredOutputLicNo as $line) {
 
-            // Split the line by spaces
             $words = preg_split('/\s+/', $line);
 
             $totalLics = htmlspecialchars($words[5]);
@@ -67,25 +63,24 @@ function populateLicenseTable($cadSystem, $port, $server, $product)
 
             $freeLics = $totalLics - $usedLics;          
 
-            echo "Total number of licenses: " . htmlspecialchars($words[5]);
+            echo "Ukupni broj licenci: " . htmlspecialchars($words[5]);
             echo "<br>";
-            echo "Used number of licenses: " . htmlspecialchars($words[10]);
+            echo "Broj iskorištenih licenci: " . htmlspecialchars($words[10]);
             echo "<br>";
-            echo "Free number of licenses: " . $freeLics;
+            echo "Broj slobodnih licenci: " . $freeLics;
             echo "<br>";
             echo "<br>";
 
             echo "</aside>";
         }
 
-        // Filter the output for lines containing the keyword "start"
+        // Filtriranje outputa po riječi "start" (svaka linija koja nam treba sadrži riječ "start")
         $filteredOutput = array_filter($output, function ($line) {
             return stripos($line, 'start') !== false;
         });
 
         $date = date_create();
 
-        // Check if there are any filtered lines to display
         if (empty($filteredOutput)) {
 
             echo "<p>No licenses taken.</p>";
@@ -93,14 +88,14 @@ function populateLicenseTable($cadSystem, $port, $server, $product)
 
             echo "<div class='table-container'>";
             echo "<table>";
-            echo "<thead><tr><th>No.</th><th>Users</th><th>Computer</th><th>Display</th><th>Start date</th></tr></thead>";
+            echo "<thead><tr><th>No.</th><th>Korisnici</th><th>Računalo</th><th>Display</th><th>Početni datum</th></tr></thead>";
             // echo "<br>";
             echo "<tbody>";
 
             foreach ($filteredOutput as $line) {
 
                 echo "<tr>";
-                // Split the line by spaces
+                // Splitanje linije po razmacima.
                 $words = preg_split('/\s+/', $line);
 
                 $lineNo = array_search($line, $filteredOutput);
