@@ -330,9 +330,9 @@ a {
 
 #form-login-input {
   /* border: 1px solid red; */
-  width: 20%;
+  width: 400px;
   position: relative;
-  left: 40%;
+  left: calc(50% - 175px);
   text-align: left;
 }
 
