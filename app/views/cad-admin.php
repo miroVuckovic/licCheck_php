@@ -1,6 +1,6 @@
 <?php
 
-require("../config/database_pdo.php");
+require("config/database_pdo.php");
 
 // Forma za dodavanje korisnika
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {

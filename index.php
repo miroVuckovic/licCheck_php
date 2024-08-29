@@ -29,7 +29,7 @@ session_start();
                 include "app/views/user-admin.php";
                 break;
             case "cad-admin";
-                readfile("app/views/cad-admin.html");
+                include "app/views/cad-admin.php";
                 break;
             case "cad-lics";
                 include "app/views/cad-lics.php";

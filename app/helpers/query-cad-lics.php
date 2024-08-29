@@ -11,7 +11,11 @@ function populateLicenseTable($cadSystem, $port, $server, $product)
         die;
     }
 
-    $localPath = "c:\\xampp\\htdocs\\licCheck\\app\\helpers";
+    $currentDir = getcwd();
+
+    // echo $currentDir;
+
+    $localPath = "$currentDir\\app\\helpers";
     $localFullPath = "$localPath\\cad\\Release\\net8.0\\lmutil_demo.exe";
 
     echo '<aside id="lic-summary">';
@@ -28,7 +32,7 @@ function populateLicenseTable($cadSystem, $port, $server, $product)
     }
 
     // Define the command to execute
-    $command = "$localFullPath lmstat -a -c $port@$server -f $product";
+    $command = "$localFullPath lmstat -a -c $port@$server -f cad";
 
     // Execute the command and capture the output
     exec($command, $output, $return_var);
@@ -111,8 +115,7 @@ function populateLicenseTable($cadSystem, $port, $server, $product)
                 echo "<td>" . htmlspecialchars($words[0]) . "</td>";
                 echo "<td>" . htmlspecialchars($words[1]) . "</td>";
                 echo "<td>" . htmlspecialchars($words[2]) . "</td>";
-                echo "<td>" . htmlspecialchars($words[7]) . " " . reformatDate(htmlspecialchars($words[8])) . "." . date_format($date, "Y") . " " . htmlspecialchars($words[9]) . "</td>";
-                
+                echo "<td>" . htmlspecialchars($words[7]) . " " . reformatDate(htmlspecialchars($words[8])) . "." . date_format($date, "Y") . " " . htmlspecialchars($words[9]) . "</td>";            
 
                 echo "</tr>";
             }

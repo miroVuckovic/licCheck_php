@@ -1,53 +1,57 @@
 <?php
 
-include "app/helpers/query-cad-lics.php";
+require("config/database_pdo.php");
 
-function initQuery()
-{
-    readfile("app/views/nav.html");
+require("app/helpers/query-cad-lics.php");
 
-    if (isset($_GET['cad'])) {       
+// Fetch CADs and data
+$cadQuery = $pdo->query("SELECT id, cad_name, display_name, port, server, product, active FROM cad_systems");
+$cads = $cadQuery->fetchAll(PDO::FETCH_ASSOC);
 
-        $cadParam = $_GET['cad'];
+echo "<nav class='cad-nav-tab'>";
 
-        if ($cadParam == 'all') {
-            echo "</main>";
-            echo "</body>";
+foreach ($cads as $cad) {
+    if ($cad['active']) {
+        $cadName = htmlspecialchars($cad['cad_name']);
+        $displayName = htmlspecialchars($cad['display_name']);
+        $port = htmlspecialchars($cad['port']);
+        $server = htmlspecialchars($cad['server']);
+        $product = htmlspecialchars($cad['product']);
 
-            readfile("../app/views/footer.html");
-            exit;
-        }
-
-        // $url = $_SERVER['PHP_SELF'] . '?cad=' . $cadParam;
-
-        // header("Refresh: 5; url=$url");
-
-        switch ($cadParam) {
-            case 'autocad':
-                populateLicenseTable("Autocad", "27000", "server.example.com", "cad");
-                break;
-            case 'inventor':
-                populateLicenseTable("Inventor", "27000", "server.example.com", "cad");
-                break;
-            case 'solidworks':
-                populateLicenseTable("Solidworks", "25734", "server.example.com", "cad");
-                break;
-            case 'nx':
-                populateLicenseTable("NX", "28000", "server.example.com", "cad");
-                break;
-            case 'creo':
-                populateLicenseTable("Creo Parametric", "7788", "server.example.com", "cad");
-                break;
-            case 'revit':
-                populateLicenseTable("Revit", "27000", "server.example.com", "cad");
-                break;
-            case 'all':
-                populateLicenseTable("Revit", "27000", "server.example.com", "all");
-                break;
-            default:
-        }
+        echo '<form class="cad-nav-button-form" method="post" action="">';
+        echo '<input type="hidden" name="cad" value="' . $cadName . '">';
+        echo '<input type="hidden" name="cad-port" value="' . $port . '">';
+        echo '<input type="hidden" name="cad-server" value="' . $server . '">';
+        echo '<input type="hidden" name="cad-product" value="' . $product . '">';
+        echo '<input type="hidden" name="cad-display-name" value="' . $displayName . '">';
+        echo '<button type="submit" onclick="redirectToPage()" class="tablinks">' . $displayName . '</button>';
+        echo '</form>';
     }
 }
 
+echo "</nav>";
 
-initQuery();
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cad']) && isset($_POST['cad-port']) && isset($_POST['cad-server']) && isset($_POST['cad-product']) && isset($_POST['cad-display-name'])) {
+    $cadName = $_POST['cad'];
+    $cadPort = $_POST['cad-port'];
+    $cadServer = $_POST['cad-server'];
+    $cadProduct = $_POST['cad-product'];
+    $cadDisplayName = $_POST['cad-display-name'];
+
+    initQuery($cadName, $cadPort, $cadServer, $cadProduct);
+}
+
+function initQuery($cad, $port, $server, $product)
+{
+    // Handle the query here
+    // Replace `$_GET` with the necessary logic if needed
+    // echo "Initiating query with CAD: $cad, Port: $port, Server: $server, Product: $product";
+    // Implement the query or function you need here
+    populateLicenseTable($cad, $port, $server, $product);
+}
+
+// Make sure to close HTML tags correctly
+echo "<script src='app/helpers/page_loader.js'></script>";
+
+?>
+

@@ -100,7 +100,7 @@ $roles = $rolesStmt->fetchAll(PDO::FETCH_ASSOC);
             <label for="role_<?= $role['id']; ?>"><?= $role['role_name']; ?></label><br>
         <?php endforeach; ?>
         <br>
-        <input type="submit" value="Dodaj korisnika">
+        <input id="add-user-button" type="submit" value="Dodaj korisnika">
         </div>
     </form>
 
