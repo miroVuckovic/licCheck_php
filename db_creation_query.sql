@@ -62,3 +62,8 @@ CREATE TABLE cad_systems (
     active BOOLEAN NOT NULL DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+INSERT INTO cad_systems (cad_name,display_name,port,server,product,active) VALUES ('autocad','AutoCAD','27000','server.example.com','acad',TRUE);
+INSERT INTO cad_systems (cad_name,display_name,port,server,product,active) VALUES ('inventor','Inventor','27000','server.example.com','inv',TRUE);
+INSERT INTO cad_systems (cad_name,display_name,port,server,product,active) VALUES ('solidworks','SolidWorks','25734','server.example.com','solidworks',TRUE);
+INSERT INTO cad_systems (cad_name,display_name,port,server,product,active) VALUES ('eplan','EPLAN','59215','server.example.com','eplan',TRUE);
