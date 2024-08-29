@@ -55,9 +55,10 @@ INSERT INTO user_roles (user_id,role_id) VALUES (2,2);
 CREATE TABLE cad_systems (
     id INT AUTO_INCREMENT PRIMARY KEY,
     cad_name VARCHAR(255) NOT NULL,
+    display_name VARCHAR(255) NOT NULL,
     port INT NOT NULL,
     server VARCHAR(255) NOT NULL,
     product VARCHAR(255) NOT NULL,
+    active BOOLEAN NOT NULL DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
