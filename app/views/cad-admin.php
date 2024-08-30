@@ -50,9 +50,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             $sql = $pdo->prepare("UPDATE cad_systems SET active = ? WHERE id = ?");
             $sql->execute([$cad_status, $cad_id]);
 
-            echo "CAD status updated successfully!";
+            echo "CAD status uspješno ažuriran!";
         } catch (Exception $e) {
-            echo "Error updating CAD status: " . $e->getMessage();
+            echo "Greška pri ažuriranju CAD-a: " . $e->getMessage();
         }
     }
 
@@ -135,7 +135,7 @@ $cads = $cadQuery->fetchAll(PDO::FETCH_ASSOC);
                                 <input type="checkbox" name="cad_status" id="cad_status_<?= htmlspecialchars($cad['id'], ENT_QUOTES, 'UTF-8'); ?>" value="1" <?= $cad['active'] ? 'checked' : ''; ?>>
                                 <br>
 
-                                <input type="submit" value="Update CAD status">
+                                <input type="submit" value="Ažuriraj status CAD-a">
                             </form>
 
 
