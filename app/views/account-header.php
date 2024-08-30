@@ -26,15 +26,28 @@ if (isset($_SESSION['username'])) {
     echo "<br>";
     echo "Rola: " . translateRoleDescriptions(htmlspecialchars($role_desc));
     echo "<br>";
-    echo "<a class='login' href='app/models/logout.php'>Odjava</a>";
+    // echo "<a class='login' href='app/models/logout.php'>Odjava</a>";
+    echo '<form action="app/models/logout.php">';
+    echo '<input type="submit" value="Odjava" />';
+    echo '</form>';
+
     echo "</div>";
 } else {
     echo "<div class='login'>";
     echo "Korisnik nije ulogiran.";
     echo "<br>";
-    echo "<a class='login' href='app/views/login.html'>Prijava</a>";
+    // echo "<a class='login' href='app/views/login.html'>Prijava</a>";
+    echo '<form action="app/views/login.html">';
+    echo '<input type="submit" value="Prijava" />';
+    echo '</form>';
+
     echo "</div>";
-    echo "<a class='login' href='app/views/register.html'>Registracija</a>";
+    // echo "<a class='login' href='app/views/register.html'>Registracija</a>";
+
+    echo '<form action="app/views/register.html">';
+    echo '<input type="submit" value="Registracija" />';
+    echo '</form>';
+
     echo "</div>";
 }
 
