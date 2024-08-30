@@ -39,7 +39,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
+    } elseif ($action === 'update-status' && isset($_POST['cad_id'])) {
+        $cad_id = $_POST['cad_id'];
+
+        // Check if the checkbox was checked
+        $cad_status = isset($_POST['cad_status']) ? 1 : 0;  // Set to 1 if checked, otherwise 0
+
+        try {
+            // Update the database with the correct value (0 or 1)
+            $sql = $pdo->prepare("UPDATE cad_systems SET active = ? WHERE id = ?");
+            $sql->execute([$cad_status, $cad_id]);
+
+            echo "CAD status updated successfully!";
+        } catch (Exception $e) {
+            echo "Error updating CAD status: " . $e->getMessage();
+        }
     }
+
+    header("Location: index.php?page=cad-admin");
+}
 }
 
 // Fetch cads and data
@@ -96,7 +114,7 @@ $cads = $cadQuery->fetchAll(PDO::FETCH_ASSOC);
                     <th>Port</th>
                     <th>Server</th>
                     <th>Proizvod</th>
-                    <th>Status</th>
+                    <!-- <th>Status</th> -->
                     <th>Radnje</th>
                 </tr>
                 <?php foreach ($cads as $cad): ?>
@@ -106,17 +124,21 @@ $cads = $cadQuery->fetchAll(PDO::FETCH_ASSOC);
                         <td><?= htmlspecialchars($cad['port']); ?></td>
                         <td><?= htmlspecialchars($cad['server']); ?></td>
                         <td><?= htmlspecialchars($cad['product']); ?></td>
-                        <td><?= htmlspecialchars($cad['active']); ?></td>
+
                         <td>
-                            <!-- Update Roles Form -->
+
                             <form action="" method="POST" style="display:inline;">
                                 <input type="hidden" name="action" value="update-status">
-                                <input type="hidden" name="cad_id" value="<?= $cad['id']; ?>">
-                                <label for="roles_<?= $cad['id']; ?>">Promijeni status:</label><br>
-                                <input type="submit" value="Ažuriraj CAD">
+                                <input type="hidden" name="cad_id" value="<?= htmlspecialchars($cad['id'], ENT_QUOTES, 'UTF-8'); ?>">
+
+                                <label for="cad_status_<?= htmlspecialchars($cad['id'], ENT_QUOTES, 'UTF-8'); ?>">Change status:</label>
+                                <input type="checkbox" name="cad_status" id="cad_status_<?= htmlspecialchars($cad['id'], ENT_QUOTES, 'UTF-8'); ?>" value="1" <?= $cad['active'] ? 'checked' : ''; ?>>
+                                <br>
+
+                                <input type="submit" value="Update CAD status">
                             </form>
 
-                            <!-- Delete User Form -->
+
                             <form action="" method="POST" style="display:inline;">
                                 <input type="hidden" name="action" value="delete_cad">
                                 <input type="hidden" name="cad_id" value="<?= $cad['id']; ?>">
