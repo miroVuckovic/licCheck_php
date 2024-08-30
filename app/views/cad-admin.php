@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
     header("Location: index.php?page=cad-admin");
 }
-}
+
 
 // Fetch cads and data
 $cadQuery = $pdo->query("SELECT cad_systems.id, cad_systems.cad_name, cad_systems.display_name, cad_systems.port, cad_systems.server, cad_systems.product, cad_systems.active 
