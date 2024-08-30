@@ -63,7 +63,7 @@ CREATE TABLE cad_systems (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO cad_systems (cad_name,display_name,port,server,product,active) VALUES ('autocad','AutoCAD','27000','server.example.com','acad',TRUE);
-INSERT INTO cad_systems (cad_name,display_name,port,server,product,active) VALUES ('inventor','Inventor','27000','server.example.com','inv',TRUE);
-INSERT INTO cad_systems (cad_name,display_name,port,server,product,active) VALUES ('solidworks','SolidWorks','25734','server.example.com','solidworks',TRUE);
-INSERT INTO cad_systems (cad_name,display_name,port,server,product,active) VALUES ('eplan','EPLAN','59215','server.example.com','eplan',TRUE);
+INSERT INTO cad_systems (cad_name,display_name,port,server,product,active) VALUES ('autocad','AutoCAD DEMO','27000','server.example.com','acad',TRUE);
+INSERT INTO cad_systems (cad_name,display_name,port,server,product,active) VALUES ('inventor','Inventor DEMO','27000','server.example.com','inv',TRUE);
+INSERT INTO cad_systems (cad_name,display_name,port,server,product,active) VALUES ('solidworks','SolidWorks DEMO','25734','server.example.com','solidworks',TRUE);
+INSERT INTO cad_systems (cad_name,display_name,port,server,product,active) VALUES ('eplan','EPLAN DEMO','59215','server.example.com','eplan',TRUE);
