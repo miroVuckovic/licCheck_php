@@ -16,9 +16,7 @@ session_start();
 
     echo "<main>";
 
-if (!isset($_SESSION['logged_in'])) {
-    include "app/views/cad-lics.php";
-} else {
+if (isset($_SESSION['logged_in'])) {
 
     if (isset($_GET['page'])) {
         
