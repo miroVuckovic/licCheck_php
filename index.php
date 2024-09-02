@@ -39,10 +39,7 @@ if (isset($_SESSION['logged_in'])) {
         }
     }
 
-    echo "</main>";
-    echo "</body>";
 
-    readfile("app/views/footer.html");
 
 } else {
     // echo 'session:' . $_SESSION['logged_in'];
@@ -52,3 +49,8 @@ if (isset($_SESSION['logged_in'])) {
     // die;
     include "app/views/training.html";
 }
+
+echo "</main>";
+echo "</body>";
+
+readfile("app/views/footer.html");
